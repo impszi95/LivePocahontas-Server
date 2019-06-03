@@ -1,0 +1,18 @@
+﻿<Window x:Class="LivePocahontasServer.Windows.windowUserMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LivePocahontasServer.Windows"
+        mc:Ignorable="d"
+        Title="windowUserMain" Height="700" Width="1000">
+    <Grid>
+        <Button x:Name="buttonUploadMoney" Content="Upload money" HorizontalAlignment="Left" Height="34" Margin="48,294,0,0" VerticalAlignment="Top" Width="158"/>
+        <Button x:Name="buttonProfile" Content="Profile" HorizontalAlignment="Left" Height="34" Margin="48,333,0,0" VerticalAlignment="Top" Width="158"/>
+        <Button x:Name="buttonLogout" Content="Logout" HorizontalAlignment="Left" Height="34" Margin="48,582,0,0" VerticalAlignment="Top" Width="158"/>
+        <ListBox x:Name="listBoxContents" HorizontalAlignment="Left" Height="526" Margin="228,90,0,0" VerticalAlignment="Top" Width="702"/>
+        <Label Content="Wallet" HorizontalAlignment="Left" Height="23" Margin="48,240,0,0" VerticalAlignment="Top" Width="158"/>
+        <Label x:Name="labelBalance" Content="" HorizontalAlignment="Left" Height="23" Margin="48,263,0,0" VerticalAlignment="Top" Width="158"/>
+
+    </Grid>
+</Window>

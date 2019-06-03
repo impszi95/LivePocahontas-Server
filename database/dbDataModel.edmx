@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="UserContentAnalyticsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ANALYTICS">
+          <Key>
+            <PropertyRef Name="uniqueID" />
+          </Key>
+          <Property Name="uniqueID" Type="numeric" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ownerID" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="buyerID" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="contentID" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="timestamp" Type="datetime" />
+          <Property Name="credit" Type="numeric" Precision="10" Scale="0" />
+        </EntityType>
+        <EntityType Name="CONTENT">
+          <Key>
+            <PropertyRef Name="uniqueID" />
+          </Key>
+          <Property Name="uniqueID" Type="numeric" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="10" />
+          <Property Name="file" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="uniqueID" />
+          </Key>
+          <Property Name="uniqueID" Type="numeric" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="varchar" MaxLength="10" />
+          <Property Name="password" Type="varchar" MaxLength="1000" />
+          <Property Name="credit" Type="numeric" Precision="10" Scale="0" />
+        </EntityType>
+        <Association Name="ANALYTICS_FOREIGN_KEY_BUYERID">
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="ANALYTICS" Type="Self.ANALYTICS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="uniqueID" />
+            </Principal>
+            <Dependent Role="ANALYTICS">
+              <PropertyRef Name="buyerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ANALYTICS_FOREIGN_KEY_CONTENTID">
+          <End Role="CONTENT" Type="Self.CONTENT" Multiplicity="1" />
+          <End Role="ANALYTICS" Type="Self.ANALYTICS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTENT">
+              <PropertyRef Name="uniqueID" />
+            </Principal>
+            <Dependent Role="ANALYTICS">
+              <PropertyRef Name="contentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ANALYTICS_FOREIGN_KEY_OWNERID">
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="ANALYTICS" Type="Self.ANALYTICS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="uniqueID" />
+            </Principal>
+            <Dependent Role="ANALYTICS">
+              <PropertyRef Name="ownerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CONTENT_FOREIGN_KEY_USERID">
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="CONTENT" Type="Self.CONTENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="uniqueID" />
+            </Principal>
+            <Dependent Role="CONTENT">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UserContentAnalyticsModelStoreContainer">
+          <EntitySet Name="ANALYTICS" EntityType="Self.ANALYTICS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CONTENT" EntityType="Self.CONTENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="ANALYTICS_FOREIGN_KEY_BUYERID" Association="Self.ANALYTICS_FOREIGN_KEY_BUYERID">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="ANALYTICS" EntitySet="ANALYTICS" />
+          </AssociationSet>
+          <AssociationSet Name="ANALYTICS_FOREIGN_KEY_CONTENTID" Association="Self.ANALYTICS_FOREIGN_KEY_CONTENTID">
+            <End Role="CONTENT" EntitySet="CONTENT" />
+            <End Role="ANALYTICS" EntitySet="ANALYTICS" />
+          </AssociationSet>
+          <AssociationSet Name="ANALYTICS_FOREIGN_KEY_OWNERID" Association="Self.ANALYTICS_FOREIGN_KEY_OWNERID">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="ANALYTICS" EntitySet="ANALYTICS" />
+          </AssociationSet>
+          <AssociationSet Name="CONTENT_FOREIGN_KEY_USERID" Association="Self.CONTENT_FOREIGN_KEY_USERID">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="CONTENT" EntitySet="CONTENT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UserContentAnalyticsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ANALYTICS">
+          <Key>
+            <PropertyRef Name="uniqueID" />
+          </Key>
+          <Property Name="uniqueID" Type="Decimal" Precision="10" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ownerID" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="buyerID" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="contentID" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="timestamp" Type="DateTime" Precision="3" />
+          <Property Name="credit" Type="Decimal" Precision="10" Scale="0" />
+          <NavigationProperty Name="USER" Relationship="Self.ANALYTICS_FOREIGN_KEY_BUYERID" FromRole="ANALYTICS" ToRole="USER" />
+          <NavigationProperty Name="CONTENT" Relationship="Self.ANALYTICS_FOREIGN_KEY_CONTENTID" FromRole="ANALYTICS" ToRole="CONTENT" />
+          <NavigationProperty Name="USER1" Relationship="Self.ANALYTICS_FOREIGN_KEY_OWNERID" FromRole="ANALYTICS" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="CONTENT">
+          <Key>
+            <PropertyRef Name="uniqueID" />
+          </Key>
+          <Property Name="uniqueID" Type="Decimal" Precision="10" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="file" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ANALYTICS" Relationship="Self.ANALYTICS_FOREIGN_KEY_CONTENTID" FromRole="CONTENT" ToRole="ANALYTICS" />
+          <NavigationProperty Name="USER" Relationship="Self.CONTENT_FOREIGN_KEY_USERID" FromRole="CONTENT" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="uniqueID" />
+          </Key>
+          <Property Name="uniqueID" Type="Decimal" Precision="10" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="credit" Type="Decimal" Precision="10" Scale="0" />
+          <NavigationProperty Name="ANALYTICS" Relationship="Self.ANALYTICS_FOREIGN_KEY_BUYERID" FromRole="USER" ToRole="ANALYTICS" />
+          <NavigationProperty Name="ANALYTICS1" Relationship="Self.ANALYTICS_FOREIGN_KEY_OWNERID" FromRole="USER" ToRole="ANALYTICS" />
+          <NavigationProperty Name="CONTENT" Relationship="Self.CONTENT_FOREIGN_KEY_USERID" FromRole="USER" ToRole="CONTENT" />
+        </EntityType>
+        <Association Name="ANALYTICS_FOREIGN_KEY_BUYERID">
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="ANALYTICS" Type="Self.ANALYTICS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="uniqueID" />
+            </Principal>
+            <Dependent Role="ANALYTICS">
+              <PropertyRef Name="buyerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ANALYTICS_FOREIGN_KEY_CONTENTID">
+          <End Role="CONTENT" Type="Self.CONTENT" Multiplicity="1" />
+          <End Role="ANALYTICS" Type="Self.ANALYTICS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTENT">
+              <PropertyRef Name="uniqueID" />
+            </Principal>
+            <Dependent Role="ANALYTICS">
+              <PropertyRef Name="contentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ANALYTICS_FOREIGN_KEY_OWNERID">
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="ANALYTICS" Type="Self.ANALYTICS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="uniqueID" />
+            </Principal>
+            <Dependent Role="ANALYTICS">
+              <PropertyRef Name="ownerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CONTENT_FOREIGN_KEY_USERID">
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="CONTENT" Type="Self.CONTENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="uniqueID" />
+            </Principal>
+            <Dependent Role="CONTENT">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ANALYTICS" EntityType="Self.ANALYTICS" />
+          <EntitySet Name="CONTENT" EntityType="Self.CONTENT" />
+          <EntitySet Name="USER" EntityType="Self.USER" />
+          <AssociationSet Name="ANALYTICS_FOREIGN_KEY_BUYERID" Association="Self.ANALYTICS_FOREIGN_KEY_BUYERID">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="ANALYTICS" EntitySet="ANALYTICS" />
+          </AssociationSet>
+          <AssociationSet Name="ANALYTICS_FOREIGN_KEY_CONTENTID" Association="Self.ANALYTICS_FOREIGN_KEY_CONTENTID">
+            <End Role="CONTENT" EntitySet="CONTENT" />
+            <End Role="ANALYTICS" EntitySet="ANALYTICS" />
+          </AssociationSet>
+          <AssociationSet Name="ANALYTICS_FOREIGN_KEY_OWNERID" Association="Self.ANALYTICS_FOREIGN_KEY_OWNERID">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="ANALYTICS" EntitySet="ANALYTICS" />
+          </AssociationSet>
+          <AssociationSet Name="CONTENT_FOREIGN_KEY_USERID" Association="Self.CONTENT_FOREIGN_KEY_USERID">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="CONTENT" EntitySet="CONTENT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UserContentAnalyticsModelStoreContainer" CdmEntityContainer="dbEntities">
+          <EntitySetMapping Name="ANALYTICS">
+            <EntityTypeMapping TypeName="UserContentAnalyticsModel.ANALYTICS">
+              <MappingFragment StoreEntitySet="ANALYTICS">
+                <ScalarProperty Name="uniqueID" ColumnName="uniqueID" />
+                <ScalarProperty Name="ownerID" ColumnName="ownerID" />
+                <ScalarProperty Name="buyerID" ColumnName="buyerID" />
+                <ScalarProperty Name="contentID" ColumnName="contentID" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="credit" ColumnName="credit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONTENT">
+            <EntityTypeMapping TypeName="UserContentAnalyticsModel.CONTENT">
+              <MappingFragment StoreEntitySet="CONTENT">
+                <ScalarProperty Name="uniqueID" ColumnName="uniqueID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="file" ColumnName="file" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER">
+            <EntityTypeMapping TypeName="UserContentAnalyticsModel.USER">
+              <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="uniqueID" ColumnName="uniqueID" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="credit" ColumnName="credit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

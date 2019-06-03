@@ -1,0 +1,20 @@
+﻿<Window x:Class="LivePocahontasServer.Windows.windowLogin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LivePocahontasServer.Windows"
+        mc:Ignorable="d"
+        Title="windowLogin" Height="232.418" Width="396.809">
+    <Grid>
+        <TextBox x:Name="textBoxUserName" HorizontalAlignment="Left" Height="23" Margin="122,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="119"/>
+        <TextBox x:Name="textBoxPassword" HorizontalAlignment="Left" Height="23" Margin="122,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="119"/>
+        <RadioButton x:Name="radioButtonActorChosen" Content="Actor" HorizontalAlignment="Left" Height="16" Margin="289,69,0,0" VerticalAlignment="Top" Width="90"/>
+        <RadioButton x:Name="radioButtonCustomerChosen" Content="Customer" HorizontalAlignment="Left" Height="16" Margin="289,95,0,0" VerticalAlignment="Top" Width="90"/>
+        <Button x:Name="buttonLogin" Content="Login" HorizontalAlignment="Left" Height="24" Margin="130,120,0,0" VerticalAlignment="Top" Width="107"/>
+        <Button x:Name="buttonRegister" Content="Register" HorizontalAlignment="Left" Height="24" Margin="272,168,0,0" VerticalAlignment="Top" Width="107"/>
+        <Label Content="Username:" HorizontalAlignment="Left" TextBlock.TextAlignment="Right" Height="23" Margin="28,32,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label Content="Password:" HorizontalAlignment="Left" TextBlock.TextAlignment="Right" Height="23" Margin="28,62,0,0" VerticalAlignment="Top" Width="94"/>
+
+    </Grid>
+</Window>
